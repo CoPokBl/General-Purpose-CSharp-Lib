@@ -1,0 +1,12 @@
+/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/bin/Debug/net6.0/GeneralPurposeLib.deps.json
+/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/bin/Debug/net6.0/GeneralPurposeLib.dll
+/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/bin/Debug/net6.0/ref/GeneralPurposeLib.dll
+/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/bin/Debug/net6.0/GeneralPurposeLib.pdb
+/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/obj/Debug/net6.0/GeneralPurposeLib.csproj.AssemblyReference.cache
+/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/obj/Debug/net6.0/GeneralPurposeLib.GeneratedMSBuildEditorConfig.editorconfig
+/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/obj/Debug/net6.0/GeneralPurposeLib.AssemblyInfoInputs.cache
+/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/obj/Debug/net6.0/GeneralPurposeLib.AssemblyInfo.cs
+/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/obj/Debug/net6.0/GeneralPurposeLib.csproj.CoreCompileInputs.cache
+/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/obj/Debug/net6.0/GeneralPurposeLib.dll
+/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/obj/Debug/net6.0/ref/GeneralPurposeLib.dll
+/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/obj/Debug/net6.0/GeneralPurposeLib.pdb
