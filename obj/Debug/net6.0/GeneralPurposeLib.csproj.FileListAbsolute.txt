@@ -10,3 +10,15 @@
 /media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/obj/Debug/net6.0/GeneralPurposeLib.dll
 /media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/obj/Debug/net6.0/ref/GeneralPurposeLib.dll
 /media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/obj/Debug/net6.0/GeneralPurposeLib.pdb
+/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/bin/Debug/net6.0/GeneralPurposeLib.deps.json
+/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/bin/Debug/net6.0/GeneralPurposeLib.dll
+/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/bin/Debug/net6.0/GeneralPurposeLib.pdb
+/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/obj/Debug/net6.0/GeneralPurposeLib.csproj.AssemblyReference.cache
+/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/obj/Debug/net6.0/GeneralPurposeLib.GeneratedMSBuildEditorConfig.editorconfig
+/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/obj/Debug/net6.0/GeneralPurposeLib.AssemblyInfoInputs.cache
+/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/obj/Debug/net6.0/GeneralPurposeLib.AssemblyInfo.cs
+/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/obj/Debug/net6.0/GeneralPurposeLib.csproj.CoreCompileInputs.cache
+/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/obj/Debug/net6.0/GeneralPurposeLib.dll
+/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/obj/Debug/net6.0/refint/GeneralPurposeLib.dll
+/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/obj/Debug/net6.0/GeneralPurposeLib.pdb
+/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/obj/Debug/net6.0/ref/GeneralPurposeLib.dll

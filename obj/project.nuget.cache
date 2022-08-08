@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TzevE8kBDReTn3u3jU4Fzmuvot/bowL7iQME11GdeVzdbfV3+W98MkJlY8rvkTHS7mRKRlLZ6TKiPPMDf+SB7A==",
+  "dgSpecHash": "24YMJrkfmeJKc5muPFKqe/0rUUoUympa22QwOkeY5NDa/R82DvC5Cm5nmY5IjBODys/TxaafaAw9RFP8zAXSoQ==",
   "success": true,
-  "projectFilePath": "/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/GeneralPurposeLib.csproj",
+  "projectFilePath": "/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/GeneralPurposeLib.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

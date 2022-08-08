@@ -44,7 +44,7 @@ public class ConfigManager {
         // Get config data
         string data = File.ReadAllText(ConfigFileName);
 
-        Dictionary<string, string> configDict;
+        Dictionary<string, string>? configDict;
         try {
             configDict = JsonSerializer.Deserialize<Dictionary<string, string>>(data);
             if (configDict == null) { throw new InvalidConfigException("Config file is not valid JSON"); }

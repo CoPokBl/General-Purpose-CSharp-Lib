@@ -133,7 +133,7 @@ public class Number {
         return a._value >= b._value;
     }
     
-    public override bool Equals(object obj) {
+    public override bool Equals(object? obj) {
         return obj is Number number && _value == number._value;
     }
     
