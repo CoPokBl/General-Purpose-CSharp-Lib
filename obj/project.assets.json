@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/GeneralPurposeLib.csproj",
+      "projectUniqueName": "/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/GeneralPurposeLib.csproj",
       "projectName": "GeneralPurposeLib",
-      "projectPath": "/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/GeneralPurposeLib.csproj",
+      "projectPath": "/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/GeneralPurposeLib.csproj",
       "packagesPath": "/home/copokbl/.nuget/packages/",
-      "outputPath": "/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/obj/",
+      "outputPath": "/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/copokbl/.nuget/NuGet/NuGet.Config"
@@ -58,7 +58,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/copokbl/.dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/copokbl/.dotnet/sdk/6.0.105/RuntimeIdentifierGraph.json"
       }
     }
   }
