@@ -4,6 +4,14 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Title>General Purpose Lib</Title>
+        <Authors>CoPokBl</Authors>
+        <Description>Just a nice little lib to help you code</Description>
+        <RepositoryUrl>https://github.com/CoPokBl/General-Purpose-CSharp-Lib</RepositoryUrl>
+        <RepositoryType>GitHub</RepositoryType>
+        <PackageProjectUrl>https://github.com/CoPokBl/General-Purpose-CSharp-Lib</PackageProjectUrl>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageLicenseUrl>https://github.com/CoPokBl/General-Purpose-CSharp-Lib/raw/main/LICENSE</PackageLicenseUrl>
     </PropertyGroup>
 
 </Project>

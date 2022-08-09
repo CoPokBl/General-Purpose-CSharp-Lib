@@ -36,14 +36,14 @@ public static class Logger {
         _typeText += log;
 
         if (!_writeTask.IsCompleted) { return; }
-        _writeTask = _streamWriter.WriteAsync(_typeText);
+        _writeTask = _streamWriter!.WriteAsync(_typeText);
         _typeText = "";
     }
 
     public static void WaitFlush() {
         _writeTask.Wait();
 
-        _streamWriter.Write(_typeText);
+        _streamWriter!.Write(_typeText);
         _typeText = "";
     }
 
@@ -54,7 +54,7 @@ public static class Logger {
         
         if (File.Exists("Logs/latest.log")) {
             using FileStream originalFileStream = File.Open("Logs/latest.log", FileMode.Open);
-            string gzFileLoc = new StreamReader(originalFileStream).ReadLine();
+            string gzFileLoc = new StreamReader(originalFileStream).ReadLine() ?? string.Empty;
 
             try {
                 gzFileLoc = "Logs" + gzFileLoc[gzFileLoc.LastIndexOf('/')..] + ".gz";

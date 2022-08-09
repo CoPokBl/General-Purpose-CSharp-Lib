@@ -18,7 +18,7 @@ public static class UserPrefs {
             Load();
         }
 
-        return !_prefs.ContainsKey(key) ? null : _prefs[key];
+        return !_prefs!.ContainsKey(key) ? null : _prefs[key];
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ public static class UserPrefs {
             Load();
         }
 
-        _prefs[key] = value;
+        _prefs![key] = value;
     }
     
     // Load prefs function

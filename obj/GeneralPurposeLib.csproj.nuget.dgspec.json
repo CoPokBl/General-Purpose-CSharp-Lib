@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/GeneralPurposeLib.csproj": {}
+    "/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/GeneralPurposeLib.csproj": {}
   },
   "projects": {
-    "/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/GeneralPurposeLib.csproj": {
+    "/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/GeneralPurposeLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/GeneralPurposeLib.csproj",
+        "projectUniqueName": "/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/GeneralPurposeLib.csproj",
         "projectName": "GeneralPurposeLib",
-        "projectPath": "/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/GeneralPurposeLib.csproj",
+        "projectPath": "/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/GeneralPurposeLib.csproj",
         "packagesPath": "/home/copokbl/.nuget/packages/",
-        "outputPath": "/media/copokbl/Big Boi/Documents/Coding/C#/GeneralPurposeLib/GeneralPurposeLib/obj/",
+        "outputPath": "/home/copokbl/Documents/Code/General-Purpose-CSharp-Lib/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/copokbl/.nuget/NuGet/NuGet.Config"
@@ -52,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/copokbl/.dotnet/sdk/6.0.105/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/copokbl/.dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
         }
       }
     }
