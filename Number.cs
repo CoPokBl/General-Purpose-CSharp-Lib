@@ -52,6 +52,18 @@ public class Number {
     public static implicit operator Number(ulong value) {
         return new Number(value);
     }
+    
+    public static implicit operator Number(uint value) {
+        return new Number(value);
+    }
+    
+    public static implicit operator Number(ushort value) {
+        return new Number(value);
+    }
+
+    public static implicit operator Number(decimal value) {
+        return new Number((double)value);
+    }
 
     public static implicit operator float(Number value) {
         return value.FloatValue;
@@ -144,7 +156,7 @@ public class Number {
     public override string ToString() {
         return _value.ToString();
     }
-    
+
     public static Number Parse(string s) {
         return double.Parse(s);
     }

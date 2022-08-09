@@ -40,18 +40,18 @@ public static class Extensions {
         }
     }
     
-    public static bool IsNull(object? obj) {
+    public static bool IsNull(this object? obj) {
         return obj == null;
     }
     
-    public static T ThrowIfNull<T>(T? obj, Exception? exception = null) {
+    public static T ThrowIfNull<T>(this T? obj, Exception? exception = null) {
         if (obj == null) {
             throw exception ?? new NullReferenceException("Object is null");
         }
         return obj;
     }
     
-    public static object ThrowIfNull(object? obj, Exception? exception = null) {
+    public static object ThrowIfNull(this object? obj, Exception? exception = null) {
         if (obj == null) {
             throw exception ?? new NullReferenceException("Object is null");
         }
@@ -112,6 +112,34 @@ public static class Extensions {
     
     public static string Sha256Hash(this string input) {
         return Utils.ToSHA256(input);
+    }
+    
+    public static Number ToNumber(this int value) {
+        return new Number(value);
+    }
+    
+    public static Number ToNumber(this long value) {
+        return new Number(value);
+    }
+    
+    public static Number ToNumber(this short value) {
+        return new Number(value);
+    }
+    
+    public static Number ToNumber(this byte value) {
+        return new Number(value);
+    }
+    
+    public static Number ToNumber(this float value) {
+        return new Number(value);
+    }
+    
+    public static Number ToNumber(this double value) {
+        return new Number(value);
+    }
+
+    public static Number ToNumber(this decimal value) {
+        return new Number((double)value);
     }
 
 }
