@@ -81,6 +81,31 @@ public class Property {
         };
     }
     
+    public PropertyType Type {
+        get {
+            return _value switch {
+                string _ => PropertyType.String,
+                int _ => PropertyType.Integer,
+                bool _ => PropertyType.Boolean,
+                double _ => PropertyType.Decimal,
+                float _ => PropertyType.Float,
+                DateTime _ => PropertyType.Date,
+                null => PropertyType.Null,
+                _ => throw new InvalidOperationException("Value is not a valid type")
+            };
+        }
+    }
+    
+    public enum PropertyType {
+        String,
+        Integer,
+        Decimal,
+        Float,
+        Boolean,
+        Date,
+        Null
+    }
+    
     // To Property
     public static implicit operator Property(string text) => new(text);
     public static implicit operator Property(int number) => new(number);
