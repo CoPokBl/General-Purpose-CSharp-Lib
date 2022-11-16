@@ -16,9 +16,9 @@ public static class Logger {
     private static Task _writeTask = Task.CompletedTask;
     private static string? _typeText;
     
-    private static readonly Dictionary<LogLevel, ConsoleColor> Colors = new Dictionary<LogLevel, ConsoleColor> {
-        { LogLevel.Debug, ConsoleColor.Green  },
-        { LogLevel.Info , ConsoleColor.White  },
+    private static readonly Dictionary<LogLevel, ConsoleColor> Colors = new() {
+        { LogLevel.Debug, ConsoleColor.White  },
+        { LogLevel.Info , ConsoleColor.Green  },
         { LogLevel.Warn , ConsoleColor.Yellow },
         { LogLevel.Error, ConsoleColor.Red    }
     };
@@ -67,7 +67,7 @@ public static class Logger {
             originalFileStream.Seek(0, SeekOrigin.Begin);
 
             using FileStream compressedFileStream = File.Create(gzFileLoc);
-            using GZipStream compressor = new GZipStream(compressedFileStream, CompressionMode.Compress);
+            using GZipStream compressor = new(compressedFileStream, CompressionMode.Compress);
             originalFileStream.CopyTo(compressor);
         }
 

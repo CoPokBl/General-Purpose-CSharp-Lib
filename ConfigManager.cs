@@ -3,7 +3,7 @@ using System.Text.Json;
 namespace GeneralPurposeLib; 
 
 public class ConfigManager {
-    public string ConfigFileName { get; set; } = "config.json";
+    public string ConfigFileName { get; set; }
 
     /// <summary>
     /// The default options in the config file.
@@ -18,7 +18,7 @@ public class ConfigManager {
     };
     
     // All the values that should be in the config file
-    private string[] RequiredConfigValues => _defaultConfig.Keys.ToArray();
+    private IEnumerable<string> RequiredConfigValues => _defaultConfig.Keys.ToArray();
     
     // Constructor
     public ConfigManager(string file = "config.json", Dictionary<string, string>? defaultConf = null, JsonSerializerOptions? serializerOptions = null) {
