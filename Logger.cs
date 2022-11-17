@@ -3,27 +3,34 @@
  Credit to Calcilore (https://github.com/Calcilore) for this file
  Original: https://github.com/Calcilore/RayKeys/blob/main/Misc/Logger.cs
  
- */
+ Modified by CoPokBl
+*/
 
 using System.IO.Compression;
+using System.Reflection;
 
 namespace GeneralPurposeLib; 
 
 public static class Logger {
     public static LogLevel LoggingLevel { get; set; } = LogLevel.Debug;
     private static FileStream? _logFile;
+    private static readonly string ExecDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!;
     private static StreamWriter? _streamWriter;
     private static Task _writeTask = Task.CompletedTask;
     private static string? _typeText;
     
     private static readonly Dictionary<LogLevel, ConsoleColor> Colors = new() {
-        { LogLevel.Debug, ConsoleColor.White  },
-        { LogLevel.Info , ConsoleColor.Green  },
+        { LogLevel.Debug, ConsoleColor.Green  },
+        { LogLevel.Info , ConsoleColor.White  },
         { LogLevel.Warn , ConsoleColor.Yellow },
         { LogLevel.Error, ConsoleColor.Red    }
     };
     
     public static void Log(object logObj, LogLevel level) {
+        if (level == LogLevel.None) {
+            throw new ArgumentException("Log level cannot be None.");
+        }
+        
         if (LoggingLevel < level) { return; }
         
         string log = $"[{DateTime.Now.ToLongTimeString()}] [{level}]: {logObj}\n";
@@ -32,7 +39,7 @@ public static class Logger {
         Console.ForegroundColor = Colors[level];
         Console.Write(log);
         Console.ForegroundColor = originalColor;
-            
+        
         _typeText += log;
 
         if (!_writeTask.IsCompleted) { return; }
@@ -50,18 +57,21 @@ public static class Logger {
     public static void Init(LogLevel logLevel) {
         LoggingLevel = logLevel;
 
-        if (!Directory.Exists("Logs")) { Directory.CreateDirectory("Logs"); }
+        string logPath = Path.Join(ExecDirectory, "Logs");
+
+        if (!Directory.Exists(logPath)) { Directory.CreateDirectory(logPath); }
         
-        if (File.Exists("Logs/latest.log")) {
-            using FileStream originalFileStream = File.Open("Logs/latest.log", FileMode.Open);
+        // Compress existing latest.log
+        if (File.Exists(logPath + "/latest.log")) {
+            using FileStream originalFileStream = File.Open(logPath + "/latest.log", FileMode.Open);
             string gzFileLoc = new StreamReader(originalFileStream).ReadLine() ?? string.Empty;
 
             try {
-                gzFileLoc = "Logs" + gzFileLoc[gzFileLoc.LastIndexOf('/')..] + ".gz";
+                gzFileLoc = logPath + gzFileLoc[gzFileLoc.LastIndexOf('/')..] + ".gz";
             }
-            catch (Exception) {
-                gzFileLoc = "Logs/Unknown-" + 
-                            (int)(new Random().Next()*1000000*3.141592653589793238462643383279502884197169) + ".log.gz";
+            catch (Exception) { // in case it cant find date of latest.log, make name have random value
+                gzFileLoc = logPath + "/Unknown-" + 
+                            (int)Math.Abs(new Random().Next()*1000000*Math.PI) + ".log.gz";
             }
 
             originalFileStream.Seek(0, SeekOrigin.Begin);
@@ -71,18 +81,18 @@ public static class Logger {
             originalFileStream.CopyTo(compressor);
         }
 
-        string logFileName = $"Logs/{DateTime.Now:yyyy-MM-dd}-";
+        string logFileName = $"{DateTime.Now:yyyy-MM-dd}-";
 
         int i = 1;
-        while (File.Exists(logFileName + i + ".log.gz")) { i++; }  // Get a unique number for the name
+        while (File.Exists($"{logPath}/{logFileName}i.log.gz")) { i++; }  // Get a unique number for the name
 
         logFileName += i + ".log";
             
-        _logFile = File.OpenWrite("Logs/latest.log");
+        _logFile = File.OpenWrite(logPath + "/latest.log");
         _streamWriter = new StreamWriter(_logFile);
         _streamWriter.AutoFlush = true;
         _typeText = "";
-        Info($"Logging to: {logFileName}");
+        Info($"Logging to: Logs/{logFileName}");
     }
         
     public static void Error(object log) => Log(log, LogLevel.Error);
@@ -91,4 +101,4 @@ public static class Logger {
     public static void Debug(object log) => Log(log, LogLevel.Debug);
 }
 
-public enum LogLevel { Error, Warn, Info, Debug }
+public enum LogLevel { None, Error, Warn, Info, Debug }
