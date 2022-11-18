@@ -87,6 +87,48 @@ public class Config {
             throw new InvalidConfigException("Config file is invalid: " + e.Message);
         }
         
+        // Check if all the required values are there
+        bool wholeConfigValid = true;
+        foreach (string requiredValue in defaultValues.Keys.ToArray()) {
+            if (configDict.ContainsKey(requiredValue)) { continue; }
+            
+            // Missing a required value, so add it
+            switch (defaultValues[requiredValue].Type) {
+                case Property.PropertyType.String:
+                    configDict.Add(requiredValue, defaultValues[requiredValue]);
+                    break;
+                case Property.PropertyType.Integer:
+                    configDict.Add(requiredValue, defaultValues[requiredValue].Integer.ToString());
+                    break;
+                case Property.PropertyType.Decimal:
+                    configDict.Add(requiredValue, defaultValues[requiredValue].Decimal.ToString(CultureInfo.InvariantCulture));
+                    break;
+                case Property.PropertyType.Float:
+                    configDict.Add(requiredValue, defaultValues[requiredValue].Float.ToString(CultureInfo.InvariantCulture));
+                    break;
+                case Property.PropertyType.Boolean:
+                    configDict.Add(requiredValue, defaultValues[requiredValue].Boolean.ToString());
+                    break;
+                case Property.PropertyType.Date:
+                    configDict.Add(requiredValue, $"DATETIME{defaultValues[requiredValue].Date.ToBinary()}");
+                    break;
+                case Property.PropertyType.Null:
+                    configDict.Add(requiredValue, "");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            //configDict.Add(requiredValue, defaultValues[requiredValue]);
+            LogInfo($"Config file is missing required value ({requiredValue}) and was added with " +
+                    $"default value ({defaultValues[requiredValue]})");
+            wholeConfigValid = false;
+        }
+        if (!wholeConfigValid) {
+            // Save the config file
+            File.WriteAllText(file, JsonSerializer.Serialize(configDict, _serializerOptions));
+            LogInfo("Wrote missing config values to config file");
+        }
+        
         Dictionary<string, Property> convertedConfig = new();
 
         foreach (KeyValuePair<string, string> configKvp in configDict) {
@@ -132,51 +174,8 @@ public class Config {
             
             // It's a string
             convertedConfig.Add(configKvp.Key, configKvp.Value);
-            
         }
 
-        // Check if all the required values are there
-        bool wholeConfigValid = true;
-        foreach (string requiredValue in defaultValues.Keys.ToArray()) {
-            if (configDict.ContainsKey(requiredValue)) { continue; }
-            
-            // Missing a required value, so add it
-            switch (defaultValues[requiredValue].Type) {
-                case Property.PropertyType.String:
-                    configDict.Add(requiredValue, defaultValues[requiredValue]);
-                    break;
-                case Property.PropertyType.Integer:
-                    configDict.Add(requiredValue, defaultValues[requiredValue].Integer.ToString());
-                    break;
-                case Property.PropertyType.Decimal:
-                    configDict.Add(requiredValue, defaultValues[requiredValue].Decimal.ToString(CultureInfo.InvariantCulture));
-                    break;
-                case Property.PropertyType.Float:
-                    configDict.Add(requiredValue, defaultValues[requiredValue].Float.ToString(CultureInfo.InvariantCulture));
-                    break;
-                case Property.PropertyType.Boolean:
-                    configDict.Add(requiredValue, defaultValues[requiredValue].Boolean.ToString());
-                    break;
-                case Property.PropertyType.Date:
-                    configDict.Add(requiredValue, $"DATETIME{defaultValues[requiredValue].Date.ToBinary()}");
-                    break;
-                case Property.PropertyType.Null:
-                    configDict.Add(requiredValue, "");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            //configDict.Add(requiredValue, defaultValues[requiredValue]);
-            LogInfo($"Config file is missing required value ({requiredValue}) and was added with " +
-                    $"default value ({defaultValues[requiredValue]})");
-            wholeConfigValid = false;
-        }
-        if (!wholeConfigValid) {
-            // Save the config file
-            File.WriteAllText(file, JsonSerializer.Serialize(configDict, _serializerOptions));
-            LogInfo("Wrote missing config values to config file");
-        }
-        
         // Return the patched config
         Values = convertedConfig;
     }

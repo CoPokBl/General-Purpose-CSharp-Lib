@@ -57,7 +57,9 @@ public class Property {
             return time;
         }
     }
-    
+
+    public override string ToString() => Text;
+
     private readonly object? _value;
 
     // Empty Constructor for JSON Deserialization
