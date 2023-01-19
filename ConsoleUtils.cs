@@ -4,7 +4,7 @@ namespace GeneralPurposeLib;
 
 public static class ConsoleUtils {
     
-    public static string CustomInput(bool enableMask = false, char mask = '*') {
+    public static string CustomInput(bool enableMask = false, char? mask = '*') {
         StringBuilder pass = new ();
         
         while (true) {
@@ -22,7 +22,7 @@ public static class ConsoleUtils {
             }
 
             pass.Append(ki.KeyChar);
-            Console.Write(enableMask ? mask : ki.KeyChar);
+            Console.Write(enableMask ? mask == null ? "" : mask : ki.KeyChar);
         }
         
         Console.Write("\n");

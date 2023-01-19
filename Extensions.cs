@@ -1,8 +1,23 @@
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 
 namespace GeneralPurposeLib; 
 
 public static class Extensions {
+
+    public static void WaitUntilCancel(this CancellationToken token) {
+        try {
+            Task.Delay(-1, token).RunTaskSync();
+        }
+        catch (TaskCanceledException) {
+            // Ignore and return
+        }
+    }
+    
+    public static void WaitUntilCancel(this CancellationTokenSource token) {
+        token.Token.WaitUntilCancel();
+    }
     
     /// <summary>
     /// Formats a TimeSpan object into a string with a custom format
@@ -20,6 +35,98 @@ public static class Extensions {
         result = result.Replace("{s}", timeSpan.Seconds.ToString());
         result = result.Replace("{ms}", timeSpan.Milliseconds.ToString());
         return result;
+    }
+    
+    /// <summary>
+    /// Runs a task, waits for it to finish, and returns the result
+    /// </summary>
+    /// <param name="task">The task to run</param>
+    /// <typeparam name="T">The return type of the task</typeparam>
+    /// <returns>The task's result</returns>
+    public static T RunTaskSync<T>(this Task<T> task) {
+        while (!task.IsCompleted) {
+            // Just wait
+        }
+        return task.Result;
+    }
+    
+    /// <summary>
+    /// Runs a task and waits for it to finish
+    /// </summary>
+    /// <param name="task">The task to run</param>
+    public static void RunTaskSync(this Task task) {
+        while (!task.IsCompleted) {
+            // Just wait
+        }
+    }
+    
+    /// <summary>
+    /// Waits until obj == value
+    /// </summary>
+    /// <param name="obj">A reference of the object to check</param>
+    /// <param name="value">The value that we should wait for obj to equal</param>
+    public static void WaitUntilEquals(this ref bool obj, bool value) {
+        while (obj != value) {
+            Thread.Sleep(1);
+        }
+    }
+    
+    /// <summary>
+    /// Waits until obj == value
+    /// </summary>
+    /// <param name="obj">A reference of the object to check</param>
+    /// <param name="value">The value that we should wait for obj to equal</param>
+    public static void WaitUntilEquals(this ref int obj, int value) {
+        while (obj != value) {
+            Thread.Sleep(1);
+        }
+    }
+    
+    /// <summary>
+    /// Waits until obj == value
+    /// </summary>
+    /// <param name="obj">A reference of the object to check</param>
+    /// <param name="value">The value that we should wait for obj to equal</param>
+    public static void WaitUntilEquals(this ref float obj, float value) {
+        while (Math.Abs(obj - value) > 0.1) {
+            Thread.Sleep(1);
+        }
+    }
+    
+    /// <summary>
+    /// Waits until obj == value
+    /// </summary>
+    /// <param name="obj">A reference of the object to check</param>
+    /// <param name="value">The value that we should wait for obj to equal</param>
+    public static void WaitUntilEquals(this ref double obj, double value) {
+        while (Math.Abs(obj - value) > 0.1) {
+            Thread.Sleep(1);
+        }
+    }
+
+    /// <summary>
+    /// When the Console.CancelKeyPress event is raised, cancel it and then cancel the given CancellationTokenSource
+    /// </summary>
+    /// <param name="source">The CancellationTokenSource to cancel</param>
+    public static void CancelOnCancelKeyPress(this CancellationTokenSource source) {
+        Console.CancelKeyPress += (_, args) => {
+            source.Cancel();
+            args.Cancel = true;
+        };
+    }
+
+    /// <summary>
+    /// Hash the specified string using MD5
+    /// </summary>
+    /// <param name="str">The string to hash</param>
+    /// <returns>The MD5 hash of the specified string</returns>
+    public static string Md5Hash(this string str) {
+        StringBuilder builder = new StringBuilder();
+        foreach (byte t in MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(str))) {
+            builder.Append(t.ToString("x2"));
+        }
+
+        return builder.ToString();
     }
 
     /// <summary>

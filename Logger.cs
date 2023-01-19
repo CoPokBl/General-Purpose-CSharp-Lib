@@ -26,14 +26,19 @@ public static class Logger {
         { LogLevel.Error, ConsoleColor.Red    }
     };
     
-    public static void Log(object logObj, LogLevel level) {
+    public static void Log(object logObj, LogLevel level, params object[] args) {
         if (level == LogLevel.None) {
             throw new ArgumentException("Log level cannot be None.");
         }
         
         if (LoggingLevel < level) { return; }
-        
-        string log = $"[{DateTime.Now.ToLongTimeString()}] [{level}]: {logObj}\n";
+
+        string msg = logObj.ToString()!;
+        if (args.Length > 0) {
+            msg = string.Format(msg, args);
+        }
+
+        string log = $"[{DateTime.Now.ToLongTimeString()}] [{level}]: {msg}\n";
         
         ConsoleColor originalColor = Console.ForegroundColor;
         Console.ForegroundColor = Colors[level];
@@ -95,10 +100,10 @@ public static class Logger {
         Info($"Logging to: Logs/{logFileName}");
     }
         
-    public static void Error(object log) => Log(log, LogLevel.Error);
-    public static void Warn(object log) => Log(log, LogLevel.Warn);
-    public static void Info(object log) => Log(log, LogLevel.Info);
-    public static void Debug(object log) => Log(log, LogLevel.Debug);
+    public static void Error(object log, params object[] args) => Log(log, LogLevel.Error, args);
+    public static void Warn(object log, params object[] args) => Log(log, LogLevel.Warn, args);
+    public static void Info(object log, params object[] args) => Log(log, LogLevel.Info, args);
+    public static void Debug(object log, params object[] args) => Log(log, LogLevel.Debug, args);
 }
 
 public enum LogLevel { None, Error, Warn, Info, Debug }
