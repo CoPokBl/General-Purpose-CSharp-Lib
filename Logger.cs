@@ -18,6 +18,7 @@ public static class Logger {
     private static StreamWriter? _streamWriter;
     private static Task _writeTask = Task.CompletedTask;
     private static string? _typeText;
+    private static object _writeLock = new();
     
     private static readonly Dictionary<LogLevel, ConsoleColor> Colors = new() {
         { LogLevel.Debug, ConsoleColor.Green  },
@@ -45,18 +46,22 @@ public static class Logger {
         Console.Write(log);
         Console.ForegroundColor = originalColor;
         
-        _typeText += log;
-
-        if (!_writeTask.IsCompleted) { return; }
-        _writeTask = _streamWriter!.WriteAsync(_typeText);
-        _typeText = "";
+        lock (_writeLock) {
+            _typeText += log;
+            
+            if (!_writeTask.IsCompleted) { return; }
+            _writeTask = _streamWriter!.WriteAsync(_typeText);
+            _typeText = "";
+        }
     }
 
     public static void WaitFlush() {
-        _writeTask.Wait();
+        lock (_writeLock) {
+            _writeTask.Wait();
 
-        _streamWriter!.Write(_typeText);
-        _typeText = "";
+            _streamWriter!.Write(_typeText);
+            _typeText = "";
+        }
     }
 
     public static void Init(LogLevel logLevel) {
@@ -92,11 +97,13 @@ public static class Logger {
         while (File.Exists($"{logPath}/{logFileName}i.log.gz")) { i++; }  // Get a unique number for the name
 
         logFileName += i + ".log";
-            
-        _logFile = File.OpenWrite(logPath + "/latest.log");
-        _streamWriter = new StreamWriter(_logFile);
-        _streamWriter.AutoFlush = true;
-        _typeText = "";
+
+        lock (_writeLock) {
+            _logFile = File.OpenWrite(logPath + "/latest.log");
+            _streamWriter = new StreamWriter(_logFile);
+            _streamWriter.AutoFlush = true;
+            _typeText = "";
+        }
         Info($"Logging to: Logs/{logFileName}");
     }
         

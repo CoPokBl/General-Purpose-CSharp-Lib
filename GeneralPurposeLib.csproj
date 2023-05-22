@@ -12,7 +12,7 @@
         <PackageProjectUrl>https://github.com/CoPokBl/General-Purpose-CSharp-Lib</PackageProjectUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageLicenseUrl>https://github.com/CoPokBl/General-Purpose-CSharp-Lib/raw/main/LICENSE</PackageLicenseUrl>
-        <PackageVersion>1.2.0</PackageVersion>
+        <PackageVersion>1.2.1</PackageVersion>
     </PropertyGroup>
 
 </Project>
