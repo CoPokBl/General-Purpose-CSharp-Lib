@@ -19,7 +19,7 @@ public class Jsonable {
         return next.Deserialize<T>()!;
     }
 
-    public T? GetOrDefault<T>(string path, T defaultValue) {
+    public T? GetOrDefault<T>(string path, T? defaultValue = default) {
         return TryGet(path, out T? value) ? value : defaultValue;
     }
 

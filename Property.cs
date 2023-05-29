@@ -86,12 +86,12 @@ public class Property {
     public PropertyType Type {
         get {
             return _value switch {
-                string _ => PropertyType.String,
-                int _ => PropertyType.Integer,
-                bool _ => PropertyType.Boolean,
-                double _ => PropertyType.Decimal,
-                float _ => PropertyType.Float,
-                DateTime _ => PropertyType.Date,
+                string => PropertyType.String,
+                int => PropertyType.Integer,
+                bool => PropertyType.Boolean,
+                double => PropertyType.Decimal,
+                float => PropertyType.Float,
+                DateTime => PropertyType.Date,
                 null => PropertyType.Null,
                 _ => throw new InvalidOperationException("Value is not a valid type")
             };
