@@ -130,50 +130,55 @@ public class Config {
         }
         
         Dictionary<string, Property> convertedConfig = new();
-
+        
         foreach (KeyValuePair<string, string> configKvp in configDict) {
-            
-            // Is it null?
-            if (configKvp.Value == "") {
-                convertedConfig.Add(configKvp.Key, new Property());
-                continue;
-            }
-            
-            // Is it a date?
-            if (configKvp.Value.StartsWith("DATETIME")) {
-                string datetimeBinary = configKvp.Value.Replace("DATETIME", "");
-                if (long.TryParse(datetimeBinary, out long datetimeBinLong)) {
+            Property defaultValue = defaultValues[configKvp.Key];
+
+            switch (defaultValue.Type) {
+                case Property.PropertyType.String:
+                    convertedConfig.Add(configKvp.Key, configKvp.Value);
+                    break;
+                
+                case Property.PropertyType.Integer:
+                    if (!int.TryParse(configKvp.Value, out int intVal)) {
+                        throw new ArgumentException("Invalid int: " + configKvp.Value);
+                    }
+                    convertedConfig.Add(configKvp.Key, intVal);
+                    break;
+                
+                case Property.PropertyType.Decimal:
+                    if (!decimal.TryParse(configKvp.Value, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal decimalVal)) {
+                        throw new ArgumentException("Invalid double: " + configKvp.Value);
+                    }
+                    convertedConfig.Add(configKvp.Key, (double)decimalVal);
+                    break;
+                
+                case Property.PropertyType.Float:
+                    if (float.TryParse(configKvp.Value, NumberStyles.Any, CultureInfo.InvariantCulture, out float floatVal)) {
+                        throw new ArgumentException("Invalid float: " + configKvp.Value);
+                    }
+                    convertedConfig.Add(configKvp.Key, floatVal);
+                    break;
+                
+                case Property.PropertyType.Boolean:
+                    convertedConfig.Add(configKvp.Key, configKvp.Value == "True");
+                    break;
+                
+                case Property.PropertyType.Date:
+                    string datetimeBinary = configKvp.Value.Replace("DATETIME", "");
+                    if (!long.TryParse(datetimeBinary, out long datetimeBinLong)) {
+                        throw new ArgumentException("Datetime in config is invalid: " + configKvp.Value);
+                    }
                     convertedConfig.Add(configKvp.Key, DateTime.FromBinary(datetimeBinLong));
-                    continue;
-                }
+                    break;
+                
+                case Property.PropertyType.Null:
+                    convertedConfig.Add(configKvp.Key, new Property());
+                    break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-            
-            // Is it a boolean?
-            if (configKvp.Value is "True" or "False") {
-                convertedConfig.Add(configKvp.Key, configKvp.Value == "True");
-                continue;
-            }
-            
-            // Is it an integer?
-            if (int.TryParse(configKvp.Value, out int intVal)) {
-                convertedConfig.Add(configKvp.Key, intVal);
-                continue;
-            }
-            
-            // Is it a decimal?
-            if (decimal.TryParse(configKvp.Value, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal decimalVal)) {
-                convertedConfig.Add(configKvp.Key, (double)decimalVal);
-                continue;
-            }
-            
-            // Is it a float?
-            if (float.TryParse(configKvp.Value, NumberStyles.Any, CultureInfo.InvariantCulture, out float floatVal)) {
-                convertedConfig.Add(configKvp.Key, floatVal);
-                continue;
-            }
-            
-            // It's a string
-            convertedConfig.Add(configKvp.Key, configKvp.Value);
         }
 
         // Return the patched config
